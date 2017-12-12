@@ -1,4 +1,3 @@
-package edit_distance;
 
 /*Class containing the edit distance and the alignment*/
 

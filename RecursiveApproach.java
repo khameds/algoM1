@@ -1,4 +1,3 @@
-package edit_distance;
 
 public class RecursiveApproach
 {
