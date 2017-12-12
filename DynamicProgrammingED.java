@@ -11,6 +11,14 @@ public class DynamicProgrammingED {
         return word2;
     }
 
+    public void setWord1(String word1) {
+        this.word1 = word1;
+    }
+
+    public void setWord2(String word2) {
+        this.word2 = word2;
+    }
+
     private String word1, word2;
     private int editDistance;
     private static long runtime;
