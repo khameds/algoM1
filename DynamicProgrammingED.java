@@ -13,7 +13,7 @@ public class DynamicProgrammingED {
 
     private String word1, word2;
     private int editDistance;
-
+    private static long runtime;
 
     public int getEditDistance() {
         return editDistance;
@@ -23,6 +23,7 @@ public class DynamicProgrammingED {
         this.word1 = word1.toLowerCase();
         this.word2 = word2.toLowerCase();
         editDistance = -1;
+        runtime = 0;
         InitMatrix();
     }
 
@@ -78,8 +79,9 @@ public class DynamicProgrammingED {
         }
         editDistance = matrix[word1.length()][word2.length()];
         long stopTime = System.currentTimeMillis();
+        runtime += stopTime-startTime;
         System.out.println("The edit distance between <" + word1 + "> and <" + word2 + "> is " + editDistance);
-        System.out.println("Execution time = " + (stopTime-startTime) + " ms.");
+        System.out.println("Execution time = " + runtime + " ms.");
     }
 
     public void DisplayMatrix()
@@ -94,10 +96,9 @@ public class DynamicProgrammingED {
         System.out.print("\u03A3 | ");
 
         for(int i = 0 ; i < word1.length() + 1 ; i++) {
-
             if(i > 0)
                 System.out.print(word1.charAt(i-1) + " | ");
-            for(int j = 0; j < word2.length() + 1 ; j++) {
+            for(int j = 0; j < word2.length() + 1 ; j++){
                 System.out.print(matrix[i][j] + " | ");
             }
             System.out.println();

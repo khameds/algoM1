@@ -47,14 +47,21 @@ public class EditDistance {
                     break;
                 case 2: // Recursive approach
                     inputWords();
-                    // TODO
+                    RecursiveApproach editDistanceRA = new RecursiveApproach(word1, word2);
+                    DistAlign da = editDistanceRA.Execute(word1.length(),word2.length());
+                    da.PrintDistAlign(word1,word2);
+
                     break;
                 case 3: // Branch and bound
                     inputWords();
-                    // TODO
+                    BranchAndBoundApproach bba = new BranchAndBoundApproach(word1,word2);
+                    DistAlign da2 = bba.Execute(word1.length(),word2.length());
+                    da2.PrintDistAlign(word1,word2);
                     break;
                 case 4: // Greedy approach
-                    //TODO
+                    inputWords();
+                    GreedyED greedy = new GreedyED();
+                    greedy.DisplayED(word1,word2);
                     break;
                 case 5: // Quit program
                     keepGoing = false;
