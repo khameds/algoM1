@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class EditDistance {
     private static final int MIN_LENGTH = 2;
-    private static final int MAX_LENGTH = 50;
-    private static final int WORD_NUMBER = 1000;
+    private static final int MAX_LENGTH = 200;
+    private static final int WORD_NUMBER = 1500;
 
     private static String word1,word2;
 
@@ -39,9 +39,108 @@ public class EditDistance {
 
         for(int i = 0 ; i < runtimes.size() ; i ++)
         {
-            System.out.println("Runtime word(" + i +") = " + runtimes.get(i)/(double)wordNumber);
+            System.out.println("Runtime word(" + i +") = " + runtimes.get(i)/(double)wordNumber + "ms.");
+        }
+    }
+
+    private static void testRec(){
+        ArrayList<Double> runtimes = new ArrayList<>();
+        RecursiveApproach rec;
+        int wordNumber = WORD_NUMBER;
+        double startTime, stopTime, runtime = 0;
+        String [] words;
+        String [] refWord;
+        System.out.println("Starting test...");
+
+        if((WORD_NUMBER % 2) != 0)
+            wordNumber++;
+
+        refWord = ProblemGenerator.generateProblem(1,1,1);
+
+        for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
+            words = ProblemGenerator.generateProblem(wordNumber, i, i);
+            rec = new RecursiveApproach(words[0], words[0]);
+            startTime = System.currentTimeMillis();
+            for(int j = 0 ; j < wordNumber ; j = j+1){
+                rec.setWord1(refWord[0]);
+                rec.setWord2(words[j]);
+                rec.Execute(refWord[0].length(), words[j].length());
+            }
+            stopTime = System.currentTimeMillis();
+            runtime = stopTime - startTime;
+            runtimes.add(runtime);
         }
 
+        for(int i = 0 ; i < runtimes.size() ; i ++)
+        {
+            System.out.println("Runtime word(" + i +") = " + runtimes.get(i)/(double)wordNumber + "ms.");
+        }
+    }
+
+
+    private static void testBAB(){
+        ArrayList<Double> runtimes = new ArrayList<>();
+        BranchAndBoundApproach bab;
+        int wordNumber = WORD_NUMBER;
+        double startTime, stopTime, runtime = 0;
+        String [] words;
+        String [] refWord;
+        System.out.println("Starting test...");
+
+        if((WORD_NUMBER % 2) != 0)
+            wordNumber++;
+
+        refWord = ProblemGenerator.generateProblem(1,1,1);
+
+        for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
+            words = ProblemGenerator.generateProblem(wordNumber, i, i);
+            bab = new BranchAndBoundApproach(words[0], words[0]);
+            startTime = System.currentTimeMillis();
+            for(int j = 0 ; j < wordNumber ; j = j+1){
+                bab.setWord1(refWord[0]);
+                bab.setWord2(words[j]);
+                bab.Execute(refWord[0].length(), words[j].length());
+            }
+            stopTime = System.currentTimeMillis();
+            runtime = stopTime - startTime;
+            runtimes.add(runtime);
+        }
+
+        for(int i = 0 ; i < runtimes.size() ; i ++)
+        {
+            System.out.println("Runtime word(" + i +") = " + runtimes.get(i)/(double)wordNumber + "ms.");
+        }
+    }
+
+    private static void testGreedy(){
+        ArrayList<Double> runtimes = new ArrayList<>();
+        int wordNumber = WORD_NUMBER;
+        double startTime, stopTime, runtime = 0;
+        GreedyED greedy = new GreedyED();
+        String [] words;
+        String [] refWord;
+        System.out.println("Starting test...");
+
+        if((WORD_NUMBER % 2) != 0)
+            wordNumber++;
+
+        refWord = ProblemGenerator.generateProblem(1,1,1);
+
+        for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
+            words = ProblemGenerator.generateProblem(wordNumber, i, i);
+            startTime = System.currentTimeMillis();
+            for(int j = 0 ; j < wordNumber ; j = j+1){
+                greedy.DisplayED(refWord[0], words[j]);
+            }
+            stopTime = System.currentTimeMillis();
+            runtime = stopTime - startTime;
+            runtimes.add(runtime);
+        }
+
+        for(int i = 0 ; i < runtimes.size() ; i ++)
+        {
+            System.out.println("Runtime word(" + i +") = " + runtimes.get(i)/(double)wordNumber + "ms.");
+        }
     }
 
 
@@ -56,6 +155,11 @@ public class EditDistance {
         System.out.println("3 : Branch and Bound");
         System.out.println("4 : Greedy approach");
         System.out.println("5 : Quit");
+        System.out.println("////////////////");
+        System.out.println("6 : DP test");
+        System.out.println("7 : Rec test");
+        System.out.println("8 : BAB test");
+        System.out.println("9 : Greedy test");
 
         choice = scan.nextInt();
         return choice;
@@ -75,8 +179,6 @@ public class EditDistance {
     {
         boolean keepGoing = true;
         int choice;
-
-
 
         while(keepGoing) {
             choice = menu();
@@ -110,6 +212,15 @@ public class EditDistance {
                     break;
                 case 6:
                     testDA();
+                    break;
+                case 7:
+                    testRec();
+                    break;
+                case 8:
+                    testBAB();
+                    break;
+                case 9:
+                    testGreedy();
                     break;
                 default:
                     System.out.println(" Invalid choice...");
