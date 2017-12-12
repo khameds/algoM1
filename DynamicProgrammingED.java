@@ -62,6 +62,8 @@ public class DynamicProgrammingED {
 
     public void EditDistance(){
         int min;
+        long startTime = System.currentTimeMillis();
+
         for(int i = 1 ; i <= word1.length() ; i++){
             for (int j = 1 ; j <= word2.length() ; j++){
                if (word1.charAt(i-1) == word2.charAt(j-1)) {
@@ -75,8 +77,9 @@ public class DynamicProgrammingED {
             }
         }
         editDistance = matrix[word1.length()][word2.length()];
-
+        long stopTime = System.currentTimeMillis();
         System.out.println("The edit distance between <" + word1 + "> and <" + word2 + "> is " + editDistance);
+        System.out.println("Execution time = " + (stopTime-startTime) + " ms.");
     }
 
     public void DisplayMatrix()
