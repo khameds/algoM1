@@ -51,21 +51,21 @@ public class DynamicProgrammingED {
     private int GetMinValue(int x, int y, int z, int i, int j){
         // ins del sub
         if(x <= y && x <= z){
-            backtrace[i][j] = "L"; // left, insertion
+            backtrace[i][j] = "+"; // left, insertion
             if(x == y)
-                backtrace[i][j]+="U"; // up, deletion
+                backtrace[i][j]+="-"; // up, deletion
             if(x == z)
-                backtrace[i][j]+="D"; // diag, substitution
+                backtrace[i][j]+="_"; // diag, substitution
             return x;
         }
         else if(y < x && y <=z){
-            backtrace[i][j] = "U"; // up, deletion
+            backtrace[i][j] = "-"; // up, deletion
             if(y == z)
-                backtrace[i][j]+="D"; // diag, substitution
+                backtrace[i][j]+="_"; // diag, substitution
             return y;
         }
         else
-            backtrace[i][j] = "D"; // diagonal, substition
+            backtrace[i][j] = "_"; // diagonal, substition
         return z;
     }
 

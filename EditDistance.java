@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class EditDistance {
     private static final int MIN_LENGTH = 2;
-    private static final int MAX_LENGTH = 200;
-    private static final int WORD_NUMBER = 1500;
+    private static final int MAX_LENGTH = 500;
+    private static final int WORD_NUMBER = 100;
 
     private static String word1,word2;
 
@@ -17,16 +17,16 @@ public class EditDistance {
         String [] words;
         String [] refWord;
         System.out.println("Starting test...");
-
+        int average = (MAX_LENGTH-MIN_LENGTH)/2;
         if((WORD_NUMBER % 2) != 0)
             wordNumber++;
 
-        refWord = ProblemGenerator.generateProblem(1,1,1);
+        refWord = ProblemGenerator.generateProblem(1,average,average);
 
         for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
             words = ProblemGenerator.generateProblem(wordNumber, i, i);
             startTime = System.currentTimeMillis();
-            dp = new DynamicProgrammingED(words[0], words[0]);
+            dp = new DynamicProgrammingED(refWord[0], words[0]);
             for(int j = 0 ; j < wordNumber ; j = j+1){
                 dp.setWord1(refWord[0]);
                 dp.setWord2(words[j]);
@@ -47,6 +47,7 @@ public class EditDistance {
         ArrayList<Double> runtimes = new ArrayList<>();
         RecursiveApproach rec;
         int wordNumber = WORD_NUMBER;
+        int average = (MAX_LENGTH-MIN_LENGTH)/2;
         double startTime, stopTime, runtime = 0;
         String [] words;
         String [] refWord;
@@ -55,7 +56,7 @@ public class EditDistance {
         if((WORD_NUMBER % 2) != 0)
             wordNumber++;
 
-        refWord = ProblemGenerator.generateProblem(1,1,1);
+        refWord = ProblemGenerator.generateProblem(1,average,average);
 
         for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
             words = ProblemGenerator.generateProblem(wordNumber, i, i);
@@ -82,6 +83,7 @@ public class EditDistance {
         ArrayList<Double> runtimes = new ArrayList<>();
         BranchAndBoundApproach bab;
         int wordNumber = WORD_NUMBER;
+        int average = (MAX_LENGTH-MIN_LENGTH)/2;
         double startTime, stopTime, runtime = 0;
         String [] words;
         String [] refWord;
@@ -90,7 +92,7 @@ public class EditDistance {
         if((WORD_NUMBER % 2) != 0)
             wordNumber++;
 
-        refWord = ProblemGenerator.generateProblem(1,1,1);
+        refWord = ProblemGenerator.generateProblem(1,average,average);
 
         for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
             words = ProblemGenerator.generateProblem(wordNumber, i, i);
@@ -116,6 +118,7 @@ public class EditDistance {
         ArrayList<Double> runtimes = new ArrayList<>();
         int wordNumber = WORD_NUMBER;
         double startTime, stopTime, runtime = 0;
+        int average = (MAX_LENGTH-MIN_LENGTH)/2;
         GreedyED greedy = new GreedyED();
         String [] words;
         String [] refWord;
@@ -124,7 +127,7 @@ public class EditDistance {
         if((WORD_NUMBER % 2) != 0)
             wordNumber++;
 
-        refWord = ProblemGenerator.generateProblem(1,1,1);
+        refWord = ProblemGenerator.generateProblem(1,average,average);
 
         for(int i = MIN_LENGTH; i < MAX_LENGTH ; i++){
             words = ProblemGenerator.generateProblem(wordNumber, i, i);
@@ -227,6 +230,5 @@ public class EditDistance {
                     break;
             }
         }
-
     }
 }

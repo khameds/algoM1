@@ -9,12 +9,13 @@ public class GreedyED {
     }
 
     long runtime;
-    String alignment = "";		
+    String alignment;
 
     public int GetEditDistance(String w1, String w2) {
 
         long startTime = System.currentTimeMillis();		// Starting time
         int i;
+        alignment = "";
         
         if(w1.length() == 0)						// If w1 is empty
         {
