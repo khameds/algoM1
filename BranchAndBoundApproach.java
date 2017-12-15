@@ -39,7 +39,6 @@ public class BranchAndBoundApproach
 	private DistAlign Min(DistAlign i, DistAlign j, DistAlign k, int len1, int len2)
 	{//i being insert, j being remove, k being replace
 
-		System.out.println(i.GetBound() + " " + j.GetBound() + " " + k.GetBound());
 		if(i.GetDist()<=j.GetDist())
 		{
 			if(i.GetDist()<=k.GetDist())	//i<=j && i<=k
