@@ -9,7 +9,7 @@ public class GreedyED {
     }
 
     long runtime;
-    String alignment;
+    String alignment;		
 
     public int GetEditDistance(String w1, String w2) {
 
@@ -30,14 +30,20 @@ public class GreedyED {
             return w1.length();
         }
 
-        int shortestLength;
+        int shortestLength, longestLength;
         int editDistance = Math.abs(w1.length() - w2.length());	// EditDistance starts at the difference between the two words (insert or remove)
         
         // Get the shortest word length to compute
-        if(w1.length()< w2.length())			
+        if(w1.length()< w2.length())
+        {
         	shortestLength = w1.length();
+        	longestLength = w2.length();
+        }
         else
+        {
         	shortestLength = w2.length();
+        	longestLength = w1.length();
+        }
         
 
         for(i = 0 ; i < shortestLength ; i++){			// For this length we either
@@ -49,7 +55,7 @@ public class GreedyED {
             	alignment = alignment.concat("|");		// Else they are equal so we just keep them
         }
         
-        for(;shortestLength<=editDistance;shortestLength++)	// The rest of the distance are either insert or remove according to which word is the shortest
+        for(;shortestLength<longestLength;shortestLength++)	// The rest of the distance are either insert or remove according to which word is the shortest
         	alignment = alignment.concat("±");
         
         long stopTime = System.currentTimeMillis();		// Stopping time
