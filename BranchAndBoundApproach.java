@@ -45,18 +45,15 @@ public class BranchAndBoundApproach
 			if(i.GetDist()<=k.GetDist())	//i<=j && i<=k
 			{
 				i.Insert(1);				//increment distance and add '+' to alignment
-				System.out.println("MinInsert");
 				return i;
 			}
 		}
 		else if(j.GetDist()<=k.GetDist())	//j<i && j<=k
 		{
 			j.Remove(1);	//increment distance and add '-' to alignment
-			System.out.println("MinRemove");
 			return j;
 		}
 
-		System.out.println("MinReplace");
 		k.Replace(1);		//increment distance and add '_' to alignment
 		return k;			//j<i && k<j
 	}
