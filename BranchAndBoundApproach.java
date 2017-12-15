@@ -85,7 +85,6 @@ public class BranchAndBoundApproach
 		{
 			da.Fusion(Execute(len1-1, len2-1));				//do nothing go to next char
 			da.Equal(1);									//simply add '|' to the alignment
-			//System.out.println(len1 + " " + len2);
 			return da;
 		}
 		
@@ -94,7 +93,6 @@ public class BranchAndBoundApproach
 		 * otherwise we set distance as bound so we know it won't be selected in Min*/
 		if(i.GetBound() <= bound)
 		{
-			System.out.println("Insert");
 			i = Execute(len1, len2-1);
 		}
 		else
@@ -102,7 +100,6 @@ public class BranchAndBoundApproach
 		
 		if(j.GetBound() <= bound)
 		{
-			System.out.println("Remove");
 			j = Execute(len1-1, len2);
 		}
 		else
@@ -110,7 +107,6 @@ public class BranchAndBoundApproach
 		
 		if(k.GetBound() <= bound)
 		{
-			System.out.println("Replace");
 			k = Execute(len1-1, len2-1);
 		}
 		else
